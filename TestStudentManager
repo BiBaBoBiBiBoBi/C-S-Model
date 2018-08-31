@@ -1,0 +1,29 @@
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class TestStudentManager {
+
+	public static void main(String[] args) {
+	
+		try{
+			//创建一个集合用于存储所有学生信息
+			List<Student> list = new LinkedList<Student>();
+			
+			//创建DaoStudent类型的对象，负责将文件中的所有数据读取到集合中
+			DaoStudent ds = new DaoStudent(list);	
+			list = ds.read();	
+			
+			//通过集合进行学生信息的增删改查操作
+			ManagerStudent ms = new ManagerStudent(list);
+			ViewStudent vs = new ViewStudent(ms);
+			vs.show();
+			
+			//将最终集合的所有学生信息全部写入到文件中
+			ds.write();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}
